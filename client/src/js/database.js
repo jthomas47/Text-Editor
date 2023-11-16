@@ -12,33 +12,28 @@ const initdb = async () =>
     },
   });
 
-
 export const putDb = async (content) => {
-  const textDb= await openDB('jate', 1);
+  const textDb = await openDB('jate', 1);
   const tx = textDb.transaction('jate', 'readwrite');
 
-  
   const store = tx.objectStore('jate');
 
-  
-  const request = store.put({ id:1, value:content });
+  const request = store.put({ id: 1, value: content });
 
-  
   const result = await request;
   console.log('data saved', result.value);
 };
 
-
-export const getDb = async () => { 
-  const textDb= await openDB('jate', 1);
+export const getDb = async () => {
+  const textDb = await openDB('jate', 1);
   const tx = textDb.transaction('jate', 'readonly');
   const store = tx.objectStore('jate');
   const request = store.get(1);
   const result = await request;
-  if(result) {
-    console.log('data retrieved', result.value); 
+  if (result) {
+    console.log('data retrieved', result.value);
   } else {
-    console.log('data not found'); 
+    console.log('data not found');
   }
   return result?.value;
 };
